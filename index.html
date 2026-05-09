@@ -64,18 +64,18 @@
     <h1>Gedankenstreich</h1>
     <p>Preparing the next experience…</p>
     <div class="actions">
-      <a href="under-construction/">Continue now</a>
-      <button id="stay-on-intro" type="button">Cancel redirect</button>
+      <a href="under-construction/" aria-label="Continue to under construction page">Continue to under-construction page</a>
+      <button id="stay-on-intro" type="button" aria-label="Cancel automatic redirect to under construction page">Cancel redirect</button>
     </div>
     <noscript>
       <p><a href="under-construction/">Continue to the site</a></p>
     </noscript>
   </main>
   <script>
-    const REDIRECT_DELAY_MS = 2200;
+    const REDIRECT_DELAY_MILLISECONDS = 2200;
     const redirectTimer = window.setTimeout(() => {
       window.location.href = new URL("under-construction/", window.location.href).toString();
-    }, REDIRECT_DELAY_MS);
+    }, REDIRECT_DELAY_MILLISECONDS);
 
     const stayOnIntroButton = document.getElementById("stay-on-intro");
     if (!(stayOnIntroButton instanceof HTMLButtonElement)) {
