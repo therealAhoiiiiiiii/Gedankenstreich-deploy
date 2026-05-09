@@ -81,7 +81,7 @@
     const stayOnIntroButton = document.getElementById("stay-on-intro");
     if (!(stayOnIntroButton instanceof HTMLButtonElement)) {
       const actualType = stayOnIntroButton ? stayOnIntroButton.tagName.toLowerCase() : "null";
-      throw new Error(`Element #stay-on-intro must be a button element; found ${actualType}`);
+      throw new Error(`Developer error: Element #stay-on-intro must be a button element; found ${actualType}`);
     }
 
     stayOnIntroButton.addEventListener("click", () => {
