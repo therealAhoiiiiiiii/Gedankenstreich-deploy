@@ -64,7 +64,7 @@
     <h1>Gedankenstreich</h1>
     <p>Preparing the next experience…</p>
     <div class="actions">
-      <a href="under-construction/">Continue to under-construction page</a>
+      <a href="under-construction/">Continue to under-construction site</a>
       <button id="stay-on-intro" type="button">Cancel redirect</button>
     </div>
     <noscript>
@@ -72,6 +72,7 @@
     </noscript>
   </main>
   <script>
+    // Briefly display intro branding before sending visitors to the current site status page.
     const REDIRECT_DELAY_MILLISECONDS = 2200;
     const redirectTimer = window.setTimeout(() => {
       window.location.href = new URL("under-construction/", window.location.href).toString();
@@ -79,7 +80,7 @@
 
     const stayOnIntroButton = document.getElementById("stay-on-intro");
     if (!(stayOnIntroButton instanceof HTMLButtonElement)) {
-      throw new Error("Missing required #stay-on-intro button");
+      throw new Error("Element #stay-on-intro must be a button element");
     }
 
     stayOnIntroButton.addEventListener("click", () => {
