@@ -72,12 +72,17 @@
     </noscript>
   </main>
   <script>
+    const REDIRECT_DELAY_MS = 2200;
     const redirectTimer = window.setTimeout(() => {
       window.location.href = new URL("under-construction/", window.location.href).toString();
-    }, 2200);
+    }, REDIRECT_DELAY_MS);
 
     const stayOnIntroButton = document.getElementById("stay-on-intro");
-    stayOnIntroButton?.addEventListener("click", () => {
+    if (!(stayOnIntroButton instanceof HTMLButtonElement)) {
+      throw new Error("Missing required #stay-on-intro button");
+    }
+
+    stayOnIntroButton.addEventListener("click", () => {
       window.clearTimeout(redirectTimer);
       stayOnIntroButton.disabled = true;
       stayOnIntroButton.textContent = "Redirect canceled";
