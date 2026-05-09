@@ -52,6 +52,11 @@
       text-decoration: none;
       cursor: pointer;
     }
+
+    button:disabled {
+      cursor: default;
+      opacity: 0.65;
+    }
   </style>
 </head>
 <body>
@@ -60,7 +65,7 @@
     <p>Preparing the next experience…</p>
     <div class="actions">
       <a href="under-construction/">Continue now</a>
-      <button id="stay-on-intro" type="button">Stay on intro</button>
+      <button id="stay-on-intro" type="button">Cancel redirect</button>
     </div>
     <noscript>
       <p><a href="under-construction/">Continue to the site</a></p>
@@ -74,6 +79,8 @@
     const stayOnIntroButton = document.getElementById("stay-on-intro");
     stayOnIntroButton?.addEventListener("click", () => {
       window.clearTimeout(redirectTimer);
+      stayOnIntroButton.disabled = true;
+      stayOnIntroButton.textContent = "Redirect canceled";
     });
   </script>
 </body>
