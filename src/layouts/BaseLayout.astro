@@ -1,21 +1,12 @@
 ---
-import '../styles/global.css';
-
-const {
-  title = 'Gedankenstreich',
-  description = 'Wenn KI auf KI trifft',
-} = Astro.props;
+import '../styles/global-kombi.css';
+import '../styles/background.css';
 ---
-<!doctype html>
-<html lang="de">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content={description} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <title>{title}</title>
-  </head>
-  <body>
-    <slot />
-  </body>
-</html>
+<div class="layout-shell reading-overlay">
+  <div class="site-background" aria-hidden="true"></div>
+  <slot />
+</div>
+<style>
+  .layout-shell { min-height:100vh; position:relative; }
+  .layout-shell > * { position:relative; z-index:10; }
+</style>

@@ -1,42 +1,144 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import '../styles/global-kombi.css';
+import '../styles/background.css';
+import '../styles/intro.css';
+
+// Intro-Seite -> Weiter auf /under-construction
+const next = '/under-construction';
 ---
+<html lang="de">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="scene-container">
+    <!-- Skip Intro (accessible, styling subordinate to site) -->
+    <a id="skip-intro" class="skip-intro" href={next} aria-label="Intro überspringen (zur Startseite)">
+      <h2>Intro überspringen</h2>
+    </a>
+    <!-- Intro-Trailer (unverändert) -->
+    <div id="intro-trailer">
+      <main class="scene-container">
+        <header class="main-header">
+          <h1 id="gedankenstreich-title">
+            <span id="part1">Gedanken</span>
+            <span id="part2-wrapper">
+              <span class="anim-text" id="strich-dash">strich –</span>
+              <span class="anim-text" id="streich">streich</span>
+            </span>
+          </h1>
+        </header>
 
-<BaseLayout title="Gedankenstreich" description="Wenn KI auf KI trifft">
-  <main class="container" style="min-height:100vh;display:grid;place-items:center;">
-    <section style="text-align:center;max-width:780px;">
-      <h1 style="margin:0 0 10px;">Gedankenstreich</h1>
-      <p style="margin:0 0 18px;color:var(--muted);">
-        Das Projekt wird gerade vorbereitet. Du wirst gleich zur Under‑Construction‑Seite weitergeleitet.
-      </p>
+        <div class="top-left-text">
+          <h1 id="ahoiiiiiiii-anim-title">
+            <span class="anim-text-h1" id="uwe">Uwe</span>
+            <span
+              class="anim-text-h1"
+              id="ahoiiiiiiii"
+              title="Ahoiiiiiiii, geboren in Kiel, Kfz‑Kennzeichen KI, Autor von Gedankenstreich und gedankenstreich.com"
+              aria-label="Ahoiiiiiiii, geboren in Kiel, Kfz‑Kennzeichen KI, Autor von Gedankenstreich und gedankenstreich.com"
+            >
+              Ahoiiiiiiii
+            </span>
+          </h1>
+          <p class="subtitle">
+            Digitalsein, Politischsein, Aufmerksamsein,<br />von der Straße aufheben lernen.
+          </p>
+          <h2>Wenn KI auf KI trifft - Die Trilogie</h2>
+        </div>
 
-      <p style="margin:0 0 22px;">
-        <a class="btn" id="skip" href="/under-construction/">Intro überspringen</a>
-      </p>
+        <div id="synapsen-anim-container" class="label-synapse" aria-hidden="false">
+          <span class="anim-text-synapsen" id="mike-copilot">Mike Copilot</span>
+          <span class="anim-text-synapsen" id="mike">Mike</span>
+          <span class="anim-text-synapsen" id="micky">Micky</span>
+          <span
+            class="anim-text-synapsen"
+            id="synapsenflutattomant"
+            title="Synapsenflutattomant, KI‑Coautor von Gedankenstreich - Band I"
+            aria-label="Synapsenflutattomant, KI‑Coautor von Gedankenstreich - Band I"
+          >
+            Synapsenflutattomant
+          </span>
+        </div>
 
-      <small style="color:var(--muted);">Weiterleitung in <span id="secs">5</span> Sekunden…</small>
-    </section>
-  </main>
+        <span
+          class="label-verlust"
+          title="Beziehungskontrollverlust, KI‑Coautor von Gedankenstreich - Band II"
+          aria-label="Beziehungskontrollverlust, KI‑Coautor von Gedankenstreich - Band II"
+        >
+          Beziehungskontrollverlust
+        </span>
+        <span class="label-drama" title="Begriffdram, KI‑Coautor von Gedankenstreich - Band III" aria-label="Begriffdram, KI‑Coautor von Gedankenstreich - Band III">
+          Begriffdram
+        </span>
+        <span class="label-geniestreich" title="Geniestreich, KI‑Coautor von gedankenstreich.com" aria-label="Geniestreich, KI‑Coautor von gedankenstreich.com">
+          Geniestreich
+        </span>
 
-  <script>
-    (function () {
-      var seconds = 5;
-      var el = document.getElementById('secs');
-      var timer = setInterval(function () {
-        seconds -= 1;
-        if (el) el.textContent = String(seconds);
-        if (seconds <= 0) {
-          clearInterval(timer);
-          window.location.href = '/under-construction/';
+        <div class="glowing-core"></div>
+      </main>
+    </div>
+
+    <!-- Weiterleitung nach Intro-Ende -->
+    <main id="intro-gate" aria-hidden="true"></main>
+
+    <script>
+      (function () {
+        const INTRO_DURATION = 22000;
+        const introTrailer = document.getElementById('intro-trailer');
+        const skipLink = document.getElementById('skip-intro');
+
+        let introTimer;
+        let skipped = false;
+
+        function goNext() {
+          if (skipped) return;
+          skipped = true;
+          // normale Navigation (kein SPA) – wie beim Link-Klick
+          window.location.href = skipLink ? skipLink.getAttribute('href') : '/under-construction';
         }
-      }, 1000);
 
-      var skip = document.getElementById('skip');
-      if (skip) {
-        skip.addEventListener('click', function () {
-          clearInterval(timer);
+        function finishIntro() {
+          if (introTrailer) {
+            introTrailer.style.opacity = '0';
+            introTrailer.style.pointerEvents = 'none';
+            introTrailer.style.display = 'none';
+            introTrailer.setAttribute('aria-hidden', 'true');
+          }
+          document.body.style.overflow = 'auto';
+          if (skipLink) skipLink.style.display = 'none';
+          goNext();
+        }
+
+        if (skipLink) {
+          skipLink.addEventListener('click', () => {
+            clearTimeout(introTimer);
+            // Link-Navigation läuft sowieso; wir stellen nur sicher, dass Timer weg ist.
+          });
+        }
+
+        function onKeydown(e) {
+          if (skipped) return;
+          const activeEl = document.activeElement;
+          const tag = activeEl && activeEl.tagName;
+          if (tag === 'INPUT' || tag === 'TEXTAREA' || (activeEl instanceof HTMLElement && activeEl.isContentEditable)) return;
+          if (e.key === 's' || e.key === 'S') {
+            e.preventDefault();
+            clearTimeout(introTimer);
+            finishIntro();
+          }
+        }
+        document.addEventListener('keydown', onKeydown);
+
+        document.addEventListener('DOMContentLoaded', () => {
+          if (skipLink) {
+            skipLink.style.display = 'inline-block';
+            skipLink.style.zIndex = '9999';
+          }
+          introTimer = setTimeout(() => finishIntro(), INTRO_DURATION);
         });
-      }
-    })();
-  </script>
-</BaseLayout>
+      })();
+    </script>
+
+  </body>
+</html>
