@@ -1,0 +1,29 @@
+.uc{
+  min-height:100vh;
+  display:grid;
+  place-items:center;
+  position:relative;
+  overflow:hidden;
+}
+.uc__bg{
+  position:absolute;
+  inset:0;
+  background-image: url('/hintergrund.jpg');
+  background-size: cover;
+  background-position: center;
+  filter: blur(2px) brightness(.55);
+  transform: scale(1.04);
+}
+.uc__card{
+  position:relative;
+  z-index:1;
+  width:min(860px, calc(100% - 48px));
+  padding:28px 26px;
+  border-radius:18px;
+  border:1px solid rgba(255,255,255,.18);
+  background: rgba(10,12,16,.55);
+  box-shadow: 0 20px 80px rgba(0,0,0,.5);
+}
+.uc__card h1{margin:0 0 10px;}
+.uc__card p{margin:0 0 10px;color:rgba(233,238,247,.88);line-height:1.5;}
+.uc__hint{color:rgba(233,238,247,.6);font-size:.95rem;}

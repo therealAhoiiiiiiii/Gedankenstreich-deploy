@@ -1,0 +1,75 @@
+---
+import '../styles/under-construction.css';
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gedankenstreich - Wenn KI auf KI trifft</title>
+  </head>
+  <body class="scene-container">
+    <!-- Titel an gewünschter Stelle: wenn du exakt "wie index" willst,
+         kann ich hier die gleiche Struktur wie .top-left-text nachbauen -->
+    <BaseLayout>
+      <header class="page-hero-standalone" role="banner" aria-label="Seiten-Titel">
+        <div class="hero-inner">
+          <h1 class="single-line">Gedankenstreich — </h1><h1 class="single-line">Wenn KI auf KI trifft</h1>
+          <p class="uc__subtitle">
+            Diese Website wird gerade aufgebaut. Bald geht’s los.
+          </p>
+        </div>
+      </header>
+
+      <section class="uc__card" aria-label="Status">
+        <h2 class="uc__h2">Danke für deine Geduld.</h2>
+        <p><nobr>Wenn du mich erreichen möchtest:</nobr></p>
+        <div class="uc__actions">
+          <a class="uc__btn" href="mailto:ahoiiiiiiii@gedankenstreich.de?subject=Gedankenstreich%20Kontakt&body=Hallo%20Uwe%2C%0A%0A">
+            Kontakt
+          </a>
+        </div>
+      </section>
+    </BaseLayout>
+    <style>
+      .scene-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        padding: 2rem;
+        text-align: center;
+      }
+      .page-hero-standalone .hero-inner { max-width: var(--container-max, 1200px); margin: 0 auto; text-align: center; width: 100%; }
+      .page-hero-standalone h1.single-line {
+        font-family: var(--font-main);
+        color: var(--heading-color);
+        margin: 0 0 .2rem 0;
+        font-size: clamp(2.2rem, 4.2vw, 3.2rem);
+        line-height: 1.02;
+        font-weight: 700;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      @media (max-width: 600px) {
+        .page-hero-standalone h1.single-line { white-space: normal; font-size: clamp(1.6rem, 2.6vw, 2.6rem); }
+      }
+      .uc__subtitle {
+          font-size: 1.2rem;
+          color: var(--text-color);
+          margin-top: 0.5rem;
+        }   .uc__card {
+          background: var(--panel-bg);
+          border: 1px solid var(--panel-border);
+          box-shadow: var(--panel-shadow);
+          border-radius: 10px;
+          padding: 2rem;
+          max-width: 400px;
+          width: 100%;
+        }
+    </style>
+  </body>
+</html>

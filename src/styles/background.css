@@ -1,0 +1,59 @@
+﻿/* kompletter Inhalt */
+/* Responsive hero/background utilities */
+
+/* ensure a global body background so all pages show the site background */
+body {
+  background-color: #0A141D;
+  background-image: url('/hintergrund.jpg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+/* overlay variable kept here because these rules are about the hero/background */
+:root{
+  --hero-overlay: linear-gradient(rgba(10,20,29,0.7), rgba(10,20,29,0.55));
+}
+
+/* Container that holds full-bleed background */
+.site-hero-bg {
+  position: relative;
+  min-height: 60vh; /* anpassen: Desktop-Hero-Größe */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #0A141D;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  /* use same background as body */
+  background-image: url('/hintergrund.jpg');
+}
+
+/* Optional: use aspect-ratio queries when you want to target wide displays specifically */
+@media (min-aspect-ratio: 16/9) {
+  .site-hero-bg {
+    background-position: center 30%;
+  }
+}
+
+/* Overlay layer to improve contrast; works well mit .content-panel */
+.site-hero-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--hero-overlay);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+pointer-events: none;
+}
+
+/* Ensure content sits above overlay */
+.site-hero-bg > .hero-inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Hinweis: falls du Desktop-Preload möchtest, nutze <link rel=preload ...> in head */

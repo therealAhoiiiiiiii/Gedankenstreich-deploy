@@ -1,0 +1,14 @@
+{
+  "name": "gedankenstreich-deploy",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev --host --port 4321",
+    "build": "astro build",
+    "preview": "astro preview --host --port 4321"
+  },
+  "devDependencies": {
+    "astro": "^5.10.0"
+  }
+}
